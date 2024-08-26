@@ -8,7 +8,10 @@
 </head>
 
 <body class="hold-transition @yield('body-class')">
-    @yield('content')
+    <div class="login-box">
+        @yield('content')
+    </div>
+    
     @vite('resources/js/auth.js')
 </body>
 
