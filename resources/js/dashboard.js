@@ -2,9 +2,8 @@ import '@admin-lte/plugins/jquery/jquery.min.js';
 import '@admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js';
 import '@admin-lte/dist/js/adminlte.min.js';
 
-/*
-TODO: FIX THIS CODE. TOO MUCH SPAGHETTI FOR SURE!
-*/
+
+
 $(function () {
     function loadContent(url, method = 'GET', data = {}) {
         $.ajax({
@@ -51,22 +50,10 @@ $(function () {
         });
     }
 
-    $(document).on('click', 'a', function (e) {
-        e.preventDefault();
-        var url = $(this).attr('href');
-        loadContent(url, 'GET');
-    });
 
-    window.onpopstate = function (event) {
-        if (event.state) {
-            loadContent(event.state.path, 'GET');
-        }
-    };
-
-    $('#loginForm').on('submit', function (e) {
+    $('#logout').on('submit', function (e) {
         e.preventDefault();
         let formData = $(this).serialize();
         loadContent($(this).attr('action'), 'POST', formData);
     });
-});
-
+})  

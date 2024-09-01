@@ -19,10 +19,8 @@ Route::middleware('web')->group(function () {
 
     Route::get('forgot-password', [AuthController::class, 'showForgotPassPage'])->name('show.forgot-pass.page');
 
-    
-
     Route::middleware('auth:admin_users')->group(function () {
         Route::get('dashboard', [DashboardController::class, 'index'])->name('show.dashboard.page');
-        Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+        Route::post('logout', [AuthController::class, 'logout'])->name('logout');
     });
 });
