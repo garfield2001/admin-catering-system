@@ -3,57 +3,58 @@ import '@admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js';
 import '@admin-lte/dist/js/adminlte.min.js';
 
 
-
 $(function () {
-    function loadContent(url, method = 'GET', data = {}) {
-        $.ajax({
-            url: url,
-            method: method,
-            data: data,
-            success: function (response) {
-                if (method === 'POST') {
-                    if (response.attempt && response.isAjax) {
-                        document.open(); // Open the document for writing
-                        document.write(response.page); // Replace the entire document with new content
-                        document.close();
-                        window.history.pushState({ path: url }, '', response.route);
-                    } else {
-                        $('.card-body').prepend(`
-                            <div class="alert alert-danger" id="errorAlert">${response.page}</div>
-                        `);
-                        setTimeout(function () {
-                            $('#errorAlert').fadeOut('slow', function () {
-                                $(this).remove();
-                            });
-                        }, 5000);
-                    }
-                } else if (method === 'GET') {
-                    $('.login-box').html(response.page);
-                    var newTitle = $(response.page).filter('title').text();
-                    if (newTitle) {
-                        $('head title').text(newTitle);
-                    }
-                }
-            },
-            error: function () {
-                if (method === 'POST') {
-                    $('.card-body').prepend(`
-                        <div class="alert alert-danger" id="errorAlert">Login failed. Please try again.</div>
-                    `);
-                    setTimeout(function () {
-                        $('#errorAlert').fadeOut('slow', function () {
-                            $(this).remove();
-                        });
-                    }, 5000);
-                }
-            }
-        });
-    }
-
-
-    $('#logout').on('submit', function (e) {
+    // Handler for navigation links click event
+    $(document).on('click', 'a.link', function (e) {
         e.preventDefault();
-        let formData = $(this).serialize();
-        loadContent($(this).attr('action'), 'POST', formData);
+        var url = $(this).attr('href');
+        loadContent(url);
+        window.history.pushState({
+            path: url
+        }, '', url); // Update browser history
     });
-})  
+
+    // Handler for breadcrumb links click event
+    $(document).on('click', '.breadcrumb-item a', function (e) {
+        e.preventDefault(); // Prevent default behavior of anchor tag
+        var url = $(this).attr('href'); // Get the URL from the anchor tag
+        loadContent(url); // Load content via AJAX
+        window.history.pushState({
+            path: url
+        }, '', url); // Update browser history
+    });
+
+    // Handler for browser back/forward button click event
+    window.onpopstate = function (event) {
+        if (event.state) {
+            loadContent(event.state.path);
+        }
+    };
+
+    // Initial check for active link on page load
+    var initialTitle = $('head title').text();
+    var initialPage = $('a[data-page="' + initialTitle.toLowerCase() + '"]');
+    initialPage.addClass('active'); // Add 'active' class to current page link
+});
+
+function loadContent(url) {
+    $.ajax({
+        url: url,
+        method: 'GET',
+        success: function (data) {
+            // Update content area with the HTML content received from the AJAX response
+            $('.content-wrapper').html($(data).find('.content-wrapper').html());
+
+            // Update document title based on the title received from the AJAX response
+            var newTitle = $(data).filter('title').text();
+            if (newTitle) {
+                $('head title').text(newTitle);
+            }
+
+            // Update the active state of navigation links based on the new title
+            var currentPage = $('a[data-page="' + newTitle.toLowerCase() + '"]');
+            $('.link').removeClass('active');
+            currentPage.addClass('active');
+        }
+    });
+}

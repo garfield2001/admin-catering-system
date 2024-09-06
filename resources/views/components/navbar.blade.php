@@ -11,11 +11,13 @@
             <a href="#" class="nav-link">Settings</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <form id="logout" action="{{ route('logout') }}" method="POST">
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
-                <button type="submit" class="nav-link"
-                    style="border: none; background: none; cursor: pointer;">logout</button>
             </form>
+            <a href="#" class="nav-link"
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                Logout
+            </a>
         </li>
     </ul>
 

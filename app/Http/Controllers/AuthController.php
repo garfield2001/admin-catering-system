@@ -7,44 +7,38 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function showLoginPage(Request $request)
+    public function showLogin()
     {
-        $title = 'Login';
-
-        if ($request->ajax()) {
-            return response()->json([
-                'page' => view('pages.log-in', ['title' => $title])->render()
-            ]);
+        if (Auth::guard('admin_users')->check()) {
+            return redirect()->route('show.dashboard.index')->with('message', 'You are already logged in');
         }
 
-        return view('pages.log-in', ['title' => $title]);
-    }
-    public function showForgotPassPage(Request $request)
-    {
-
-        if ($request->ajax()) {
-            return response()->json([
-                'page' => view('pages.forgot-pass', ['title' => 'Forgot Password'])->render()
-            ]);
-        }
-
-        return view('pages.forgot-pass');
+        return view('pages.auth.log-in', ['title' => 'Login']);
     }
 
-    public function loginUser(Request $request)
+    public function showForgotPass()
     {
-        $title = 'Dashboard';
+        return view('pages.auth.forgot-pass', ['title' => 'Forgot Password']);
+    }
 
-        return response()->json([
-            'attempt' => Auth::guard('admin_users')->attempt($request->validate([
-                'username' => 'required|string',
-                'password' => 'required|string',
-            ])),    
-            'isAjax' => $request->ajax(),
-            'page' => view('pages.index', ['title' => $title])->render(),
-            'route' => route('show.dashboard.page')
+    public function login(Request $request)
+    {
+        $credentials = $request->validate([
+            'username' => 'required|string',
+            'password' => 'required|string',
         ]);
+
+        if (Auth::guard('admin_users')->attempt($credentials)) {
+            return redirect()->route('show.dashboard.index')->with([
+                'success' => 'Login successful.',
+            ]);
+        }
+
+        return redirect()->route('login.show')->with('error', 'Invalid login credentials.');
+        
+    
     }
+
     public function logout(Request $request)
     {
         Auth::guard('admin_users')->logout();
@@ -53,6 +47,6 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect()->route('show.login.page')->with('success', 'Logged out successfully.');
+        return redirect()->route('show.login')->with('success', 'Logged out successfully.');
     }
 }

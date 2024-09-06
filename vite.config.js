@@ -6,10 +6,10 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                'resources/css/login.css',
-                'resources/js/login.js',
-                'resources/css/register.css',
-                'resources/js/register.js',
+                'resources/css/auth.css',
+                'resources/css/dashboard.css',
+                'resources/js/auth.js',
+                'resources/js/dashboard.js'
             ],
             refresh: true,
         }),

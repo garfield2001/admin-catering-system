@@ -1,6 +1,6 @@
 @php
-    $authPage = $title === 'Login' || $title === 'Forgot Password';
-    $dashboardPage = $title === 'Dashboard';
+    $auth = $title === 'Login' || $title === 'Forgot Password';
+    $dashboard = $title === 'Dashboard' || $title === 'Categories';
 @endphp
 
 <!DOCTYPE html>
@@ -10,17 +10,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title')</title>
-    @if ($authPage)
+    @if ($auth)
         @vite('resources/css/auth.css')
-    @elseif ($dashboardPage)
+    @elseif ($dashboard)
         @vite('resources/css/dashboard.css')
     @endif
 </head>
 
 <body class="hold-transition @yield('body-class')">
-    @if ($authPage)
+    @if ($auth)
         @yield('content')
-    @elseif ($dashboardPage)
+    @elseif ($dashboard)
         <div class="wrapper">
             @include('components.preloader')
             @include('components.navbar')
@@ -33,9 +33,9 @@
             </div>
         </div>
     @endif
-    @if ($authPage)
+    @if ($auth)
         @vite('resources/js/auth.js')
-    @elseif ($dashboardPage)
+    @elseif ($dashboard)
         @vite('resources/js/dashboard.js')
     @endif
 </body>

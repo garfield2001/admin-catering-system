@@ -13,7 +13,7 @@ class DashboardController extends Controller
         // Retrieve the authenticated user
         $user = Auth::user();
 
-        return view("pages.index", [
+        return view("pages.dashboard.index", [
             'title' => 'Dashboard',
             'user' => $user
         ]);

@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-secondary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-        <img src="{{ asset('images/logo.jpg') }}" alt="Zek Logo" class="brand-image img-circle elevation-3"
+        <img src="{{ asset('images/AdminLTELogo.png') }}" alt="Zek Logo" class="brand-image img-circle elevation-3"
             style="opacity: .8">
         <span class="brand-text font-weight-light">Zek Catering</span>
     </a>
@@ -10,7 +10,7 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="{{ asset('dist/img/user1-128x128.jpg') }}" class="img-circle elevation-2" alt="User Image">
+                <img src="{{ asset('images/avatar1.png') }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
                 <a href="#" class="d-block">{{-- {{ $user->first_name . ' ' . $user->last_name }} --}}</a>
@@ -36,7 +36,7 @@
                 data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
                 <li class="nav-item">
-                    <a href="" data-page="dashboard"
+                    <a href="{{ route('show.dashboard.index') }}" data-page="dashboard"
                         class="link nav-link {{ $title == 'Dashboard' ? 'active' : '' }}">
                         <i class="nav-icon fa-solid fa-house"></i>
                         <p>
@@ -47,7 +47,7 @@
                 </li>
                 <li class="nav-header">Admin</li>
                 <li class="nav-item">
-                    <a href="" data-page="cateringPackages"
+                    <a href="{{ route('show.cateringPackages') }}" data-page="cateringPackages"
                         class="link nav-link {{ $title == 'Catering Packages' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-box"></i>
                         <p>
@@ -56,7 +56,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="" data-page="categories"
+                    <a href="{{ route('show.categories') }}" data-page="categories"
                         class="link nav-link {{ $title == 'Categories' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-box"></i>
                         <p>
@@ -65,7 +65,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="" data-page="packages"
+                    <a href="{{ route('show.packages') }}" data-page="packages"
                         class="link nav-link {{ $title == 'Packages' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-box"></i>
                         <p>
@@ -74,7 +74,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="" data-page="dishes"
+                    <a href="{{ route('show.dishes') }}" data-page="dishes"
                         class="link nav-link {{ $title == 'Dishes' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-box"></i>
                         <p>
@@ -84,7 +84,7 @@
                 </li>
                 <li class="nav-header">Reservation</li>
                 <li class="nav-item">
-                    <a href="" data-page="reservations"
+                    <a href="#" data-page="reservations"
                         class="link nav-link {{ $title == 'Reservations' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-box"></i>
                         <p>
