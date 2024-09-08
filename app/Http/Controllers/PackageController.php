@@ -14,6 +14,7 @@ class PackageController extends Controller
     {
         // Retrieve the authenticated user
         $user = Auth::user();
+        
 
         $packages = Package::with('category', 'dishes')->get();
         $categories = Category::all();
@@ -24,6 +25,8 @@ class PackageController extends Controller
             'packages' => $packages,
             'categories' => $categories
         ]);
+
+
     }
 
     public function store(Request $request)

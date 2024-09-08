@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('app')
 
 @section('title', $title)
 
@@ -64,7 +64,7 @@
 @endsection
 
 @push('scripts')
-    <script id="custom-script">
+    {{-- <script id="custom-script">
         $(document).ready(function() {
             $("#table").DataTable({
                 responsive: true,
@@ -331,5 +331,5 @@
                 }
             });
         });
-    </script>
+    </script> --}}
 @endpush

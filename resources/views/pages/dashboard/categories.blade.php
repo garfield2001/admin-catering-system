@@ -57,7 +57,7 @@
 @endsection
 
 @push('scripts')
-    <script id="custom-script">
+    {{-- <script id="custom-script">
         $(document).ready(function() {
             $("#table").DataTable({
                 responsive: true,
@@ -339,5 +339,5 @@
                 }
             });
         });
-    </script>
+    </script> --}}
 @endpush

@@ -1,6 +1,9 @@
 @php
-    $auth = $title === 'Login' || $title === 'Forgot Password';
-    $dashboard = $title === 'Dashboard' || $title === 'Categories';
+    $authTitles = ['Login', 'Forgot Password'];
+    $dashboardTitles = ['Dashboard', 'Categories', 'Packages', 'Dishes', 'Reservations'];
+
+    $auth = in_array($title, $authTitles);
+    $dashboard = in_array($title, $dashboardTitles);
 @endphp
 
 <!DOCTYPE html>
@@ -33,6 +36,7 @@
             </div>
         </div>
     @endif
+
     @if ($auth)
         @vite('resources/js/auth.js')
     @elseif ($dashboard)

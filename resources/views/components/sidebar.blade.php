@@ -47,15 +47,6 @@
                 </li>
                 <li class="nav-header">Admin</li>
                 <li class="nav-item">
-                    <a href="{{ route('show.cateringPackages') }}" data-page="cateringPackages"
-                        class="link nav-link {{ $title == 'Catering Packages' ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-box"></i>
-                        <p>
-                            CATERING PACKAGES
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a href="{{ route('show.categories') }}" data-page="categories"
                         class="link nav-link {{ $title == 'Categories' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-box"></i>
